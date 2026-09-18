@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="IAN GreenLink - Environmental learning, recycling, activities and community reporting platform.">
+<title>IAN GreenLink</title>
+<style>
+:root{
+--green:#168447;--green2:#25a65b;--mint:#e9f8ef;--ink:#143025;--muted:#718078;
+--bg:#f5f8f6;--card:#fff;--line:#e4ece7;--shadow:0 12px 35px rgba(22,55,39,.08);
+--danger:#c94444;--amber:#d78b1f
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+.topbar{height:72px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;padding:0 24px;gap:16px}
+.menu{display:none;border:0;background:var(--mint);border-radius:12px;width:42px;height:42px;font-size:20px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-size:19px;font-weight:700}.brand b{color:var(--green)}.brand-icon{width:38px;height:38px;border-radius:12px;background:var(--green);display:grid;place-items:center;color:white}
+.top-actions{margin-left:auto;display:flex;gap:10px;align-items:center}.icon-btn,.profile{border:1px solid var(--line);background:white;width:40px;height:40px;border-radius:12px}.profile{background:var(--ink);color:#fff;font-weight:800}
+#sidebar{position:fixed;top:72px;bottom:0;left:0;width:245px;background:#fff;border-right:1px solid var(--line);padding:25px 16px;z-index:10}
+.side-title{font-size:11px;font-weight:800;color:#9aa69f;letter-spacing:1.5px;padding:0 12px 12px}
+nav{display:grid;gap:6px}nav a{display:flex;gap:13px;align-items:center;padding:13px 12px;border-radius:12px;color:#637169;text-decoration:none;font-size:14px;font-weight:650}nav a:hover,nav a.active{background:var(--mint);color:var(--green)}nav a:first-letter{font-size:17px}
+.side-card{margin:25px 5px 0;padding:17px;border-radius:17px;background:linear-gradient(145deg,#e9f8ef,#f7fcf9);border:1px solid #d9eee1}.side-card strong{display:block;margin-bottom:6px}.side-card small{display:block;color:var(--muted);line-height:1.5}.mini-btn{display:inline-block;margin-top:13px;color:var(--green);font-size:12px;font-weight:800;text-decoration:none}
+main{margin-left:245px;padding:104px 34px 50px;min-height:100vh;max-width:1450px}
+.page-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:26px}.eyebrow{color:var(--green);font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase}.page-head h1{margin:6px 0 5px;font-size:34px;line-height:1.1}.page-head p{margin:0;color:var(--muted)}
+.btn{border:0;border-radius:12px;padding:12px 17px;font-weight:800;background:var(--green);color:#fff;box-shadow:0 7px 16px rgba(22,132,71,.16)}.btn:hover{filter:brightness(.96);transform:translateY(-1px)}.btn.alt{background:#fff;color:var(--green);border:1px solid var(--line);box-shadow:none}
+.hero{background:linear-gradient(125deg,#123d2b,#168447 65%,#39ad68);color:#fff;border-radius:25px;padding:40px;display:grid;grid-template-columns:1.4fr .7fr;gap:30px;overflow:hidden;position:relative;box-shadow:var(--shadow)}.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.08);right:-80px;top:-100px}.hero h1{font-size:42px;margin:8px 0 13px;max-width:680px}.hero p{color:#d8f2e2;max-width:650px;line-height:1.7}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.hero .btn{background:#fff;color:var(--green)}.hero .btn.alt{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);color:#fff}.hero-art{display:grid;place-items:center;font-size:130px;z-index:1}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:20px 0}.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.stat{padding:20px}.stat .num{font-size:30px;font-weight:850;margin:5px 0}.stat small{color:var(--muted)}.stat-icon{float:right;width:42px;height:42px;border-radius:12px;background:var(--mint);display:grid;place-items:center}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.grid.two{grid-template-columns:repeat(2,1fr)}.card{padding:21px}.card h3{margin:0 0 8px}.card p{color:var(--muted);line-height:1.55;margin:0}.card .emoji{font-size:30px;margin-bottom:12px}.card-link{display:inline-block;margin-top:15px;color:var(--green);font-weight:800;font-size:13px;text-decoration:none}
+.section{margin-top:27px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.section-title h2{font-size:20px;margin:0}.muted{color:var(--muted)}
+.progress{height:8px;background:#edf2ef;border-radius:20px;overflow:hidden;margin-top:12px}.progress span{display:block;height:100%;background:var(--green);border-radius:20px}
+.lesson{display:flex;gap:15px;align-items:flex-start}.lesson-icon{min-width:48px;height:48px;border-radius:14px;background:var(--mint);display:grid;place-items:center;font-size:22px}
+.searchbar{display:flex;gap:10px;margin-bottom:18px}.searchbar input,.form input,.form textarea,.form select{width:100%;border:1px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;outline:none;color:var(--ink)}.searchbar input:focus,.form input:focus,.form textarea:focus,.form select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(22,132,71,.08)}
+.tag{display:inline-block;padding:6px 9px;border-radius:20px;background:var(--mint);color:var(--green);font-size:11px;font-weight:800;margin:4px 4px 0 0}.warning{background:#fff6e6;color:#a66a11}.danger{background:#fff0f0;color:var(--danger)}
+.activity{display:flex;justify-content:space-between;gap:18px;align-items:center}.datebox{min-width:58px;text-align:center;background:var(--mint);border-radius:13px;padding:8px}.datebox b{display:block;font-size:20px;color:var(--green)}.datebox small{font-size:10px;color:var(--muted)}
+.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse}.table th,.table td{text-align:left;padding:14px;border-bottom:1px solid var(--line);font-size:13px}.table th{color:var(--muted);font-size:11px;text-transform:uppercase}
+.form{display:grid;gap:14px}.form label{font-size:12px;font-weight:800}.form textarea{min-height:120px;resize:vertical}.notice{padding:13px 15px;border-radius:12px;background:var(--mint);color:#236c43;font-size:13px}
+.creator{display:grid;grid-template-columns:190px 1fr;gap:25px;align-items:center}.avatar{width:170px;height:170px;border-radius:35px;background:linear-gradient(145deg,#123d2b,#2db36a);color:#fff;display:grid;place-items:center;font-size:65px;font-weight:900;box-shadow:var(--shadow)}
+.footer{text-align:center;color:var(--muted);font-size:12px;padding:35px 0 0}
+.empty{padding:35px;text-align:center;color:var(--muted);background:#fff;border:1px dashed #cfdad3;border-radius:16px}
+.toast{position:fixed;right:25px;bottom:25px;background:#143025;color:white;padding:13px 17px;border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(15px);transition:.25s;z-index:50}.toast.show{opacity:1;transform:none}
+body.dark{--bg:#0f1713;--card:#17231c;--ink:#edf8f0;--muted:#9eaca4;--line:#29382f}body.dark .topbar,body.dark #sidebar,body.dark .icon-btn,body.dark .profile,body.dark .form input,body.dark .form textarea,body.dark .form select,body.dark .empty{background:#17231c}body.dark nav a{color:#aab8b0}body.dark .btn.alt{background:#17231c}
+.fade{animation:fade .35s ease both}@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@media(max-width:900px){.menu{display:block}#sidebar{transform:translateX(-100%);transition:.25s;box-shadow:10px 0 30px rgba(0,0,0,.08)}#sidebar.open{transform:none}main{margin-left:0;padding:94px 18px 40px}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr 1fr}.hero{grid-template-columns:1fr}.hero-art{display:none}}
+@media(max-width:600px){.topbar{padding:0 14px}.brand{font-size:16px}.stats,.grid,.grid.two{grid-template-columns:1fr}.page-head{align-items:flex-start;flex-direction:column}.page-head h1{font-size:28px}.hero{padding:27px 22px;border-radius:20px}.hero h1{font-size:31px}.creator{grid-template-columns:1fr}.avatar{width:125px;height:125px;font-size:48px}}
+
+
+.modal-overlay{position:fixed;inset:0;background:rgba(7,25,17,.62);backdrop-filter:blur(7px);display:none;place-items:center;z-index:100;padding:18px}.modal-overlay.show{display:grid}.login-box{width:min(430px,100%);background:var(--card);border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:0 25px 70px rgba(0,0,0,.22);position:relative}.modal-close{position:absolute;right:15px;top:12px;border:0;background:transparent;font-size:27px;color:var(--muted);cursor:pointer}.login-logo{width:58px;height:58px;border-radius:17px;background:var(--green);display:grid;place-items:center;font-size:28px;margin-bottom:17px}.login-box h2{font-size:28px;margin:5px 0 7px}.admin-login-link{border:0;background:none;color:var(--green);font-weight:800;margin-top:15px;cursor:pointer}.admin-login-area{margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}.user-pill{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:20px;background:var(--mint);color:var(--green);font-size:12px;font-weight:800}.admin-tools{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+
+.lesson-modal{position:fixed;inset:0;background:rgba(7,25,17,.66);backdrop-filter:blur(8px);display:none;place-items:center;z-index:110;padding:18px}
+.lesson-modal.show{display:grid}
+.lesson-modal-box{width:min(760px,100%);max-height:88vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:0 25px 70px rgba(0,0,0,.25);position:relative}
+.lesson-modal-box h2{margin:7px 0 12px;font-size:28px}
+.lesson-notes{line-height:1.75;color:var(--ink);white-space:pre-line}
+.lesson-notes b{color:var(--green)}
+
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <button class="menu" onclick="toggleSidebar()">☰</button>
+    <a class="brand" href="#home"><span class="brand-icon">🌿</span><span>IAN <b>GreenLink</b></span></a>
+    <div class="top-actions">
+      <button class="icon-btn" onclick="toggleTheme()" title="Change theme">◐</button>
+      <button class="profile" onclick="openLogin()" title="Login">I</button>
+    </div>
+  </header>
+
+  <aside id="sidebar">
+    <div class="side-title">GREENLINK</div>
+    <nav>
+      <a href="#home" data-page="home">⌂ <span>Home</span></a>
+      <a href="#dashboard" data-page="dashboard">▦ <span>Dashboard</span></a>
+      <a href="#learn" data-page="learn">📚 <span>Learn</span></a>
+      <a href="#recycling" data-page="recycling">♻️ <span>Recycling</span></a>
+      <a href="#activities" data-page="activities">🌱 <span>Activities</span></a>
+      <a href="#announcements" data-page="announcements">📢 <span>Announcements</span></a>
+      <a href="#report" data-page="report">📝 <span>Report Issue</span></a>
+      <a href="#admin" data-page="admin">⚙️ <span>Admin</span></a>
+      <a href="#about" data-page="about">👤 <span>About Creator</span></a>
+    </nav>
+    <div class="side-card">
+      <strong>Make a difference.</strong>
+      <small>Small actions can create a cleaner community.</small>
+      <a href="#report" class="mini-btn">Report an issue →</a>
+    </div>
+  </aside>
+
+  <main id="content"></main>
+  <div id="toast"></div>
+</div>
+
+<footer class="footer">
+  <strong>IAN GreenLink</strong> • ICT Environmental Learning Project<br>
+  Created by <b>Kanakulya Ian</b> • St Cyprian High School • 2026
+</footer>
+
+<script>
+const state={
+ reports: JSON.parse(localStorage.getItem("greenlink_reports")||"[]"),
+ announcements:[
+  {title:"Community Clean-Up Day",text:"Join the community for a clean-up and environmental awareness activity.",date:"20 Sep 2026",tag:"Activity"},
+  {title:"Recycling Week",text:"Learn how to sort common household waste and reduce what goes to landfill.",date:"24 Sep 2026",tag:"Education"},
+  {title:"Tree Care Reminder",text:"Young trees need regular watering and protection during dry periods.",date:"28 Sep 2026",tag:"Reminder"}
+ ],
+ lessons:[
+  {icon:"🌍",title:"Climate & Environment",text:"Understand climate change, greenhouse gases, conservation and practical environmental action.",cat:"Environment",notes:"Climate is the long-term pattern of weather in a place. The Earth's climate is influenced by natural processes, but human activities have increased greenhouse gases such as carbon dioxide and methane. Burning fossil fuels, deforestation and some industrial activities contribute to these emissions.\n\nKey ideas:\n• Reduce unnecessary energy use and choose efficient appliances.\n• Protect trees and forests because they store carbon and support ecosystems.\n• Walk, cycle or use shared transport when practical.\n• Support school and community projects that reduce pollution and protect nature."},
+  {icon:"♻️",title:"Waste Management",text:"Learn waste prevention, the 5 Rs, recycling, composting and safe disposal.",cat:"Recycling",notes:"Waste management means handling waste safely from the moment it is produced until it is reused, recycled, composted or disposed of. The waste hierarchy encourages us to prevent waste first, then reuse and recycle materials before disposal.\n\nRemember the 5 Rs:\n• Refuse unnecessary items.\n• Reduce what you consume.\n• Reuse items where possible.\n• Repair useful items instead of throwing them away.\n• Recycle suitable materials.\n\nKeep recyclable materials reasonably clean and dry, and separate hazardous or electronic waste for appropriate handling."},
+  {icon:"💧",title:"Water Conservation",text:"Learn why freshwater matters and practical ways to save and protect it.",cat:"Water",notes:"Fresh water is essential for people, agriculture, animals and ecosystems. Water conservation means using water carefully and preventing unnecessary loss and pollution.\n\nPractical actions:\n• Close taps while brushing your teeth.\n• Repair leaking taps and pipes.\n• Use only the water you need when washing.\n• Collect rainwater where it is safe and appropriate.\n• Keep rubbish, chemicals and oils away from drains and water sources.\n\nSaving water also saves the energy used to pump, treat and distribute water."},
+  {icon:"🌳",title:"Forests & Trees",text:"Discover the value of forests, tree care and responsible protection of green spaces.",cat:"Nature",notes:"Forests provide habitats for wildlife, help protect soil, influence the water cycle and store carbon. Trees also provide shade, fruits, timber and other resources.\n\nGood tree-care practices include:\n• Plant species that are suitable for the local environment.\n• Water young trees regularly when rainfall is insufficient.\n• Protect seedlings from damage by people and animals.\n• Keep weeds and competing vegetation under control around young plants.\n• Avoid unnecessary cutting and support responsible forest management.\n\nA healthy forest is more than a collection of trees: it is a living ecosystem."},
+  {icon:"⚡",title:"Clean Energy",text:"Learn renewable energy basics and simple ways to reduce electricity waste.",cat:"Energy",notes:"Clean energy comes from sources that produce little or no greenhouse-gas pollution during operation. Renewable sources include sunlight, wind, moving water and geothermal heat.\n\nSolar panels convert sunlight into electricity. Hydropower uses moving water to generate electricity. Wind turbines use moving air.\n\nEnergy-saving habits:\n• Switch off lights and equipment when they are not needed.\n• Use efficient bulbs and appliances.\n• Make use of natural light and ventilation when appropriate.\n• Avoid wasting electricity through unnecessary standby use."},
+  {icon:"🐝",title:"Biodiversity",text:"Explore biodiversity, ecosystems and ways students can protect living things.",cat:"Nature",notes:"Biodiversity is the variety of living things, including plants, animals, fungi and microorganisms, together with the ecosystems where they live. Biodiversity supports food systems, pollination, soil health, clean water and other ecosystem services.\n\nHow students can help:\n• Protect habitats around school and home.\n• Avoid littering and unnecessary destruction of plants.\n• Plant suitable native or locally appropriate vegetation.\n• Do not disturb wild animals unnecessarily.\n• Learn about local species and share accurate environmental information."}
+ ]
+};
+
+const pages={
+home(){
+return `<div class="fade">
+<section class="hero"><div><div class="eyebrow">Welcome to IAN GreenLink</div><h1>Learn. Act. Protect our environment.</h1><p>A digital platform for environmental education, recycling awareness, community activities and reporting local environmental issues.</p><div class="hero-actions"><a class="btn" href="#learn">Start Learning</a><a class="btn alt" href="#report">Report an Issue</a></div></div><div class="hero-art">🌱</div></section>
+<div class="stats">${stat("📚","6","Learning topics")} ${stat("♻️","8","Recycling categories")} ${stat("🌱","12","Community activities")} ${stat("📢",state.announcements.length,"Announcements")}</div>
+<div class="section"><div class="section-title"><h2>Explore GreenLink</h2><a class="card-link" href="#dashboard">Open dashboard →</a></div><div class="grid">${feature("📚","Learn","Build environmental knowledge with short, clear lessons.","learn")} ${feature("♻️","Recycling","Know what can be reused, recycled or composted.","recycling")} ${feature("🌱","Activities","Take part in practical community environmental actions.","activities")}</div></div>
+<div class="section"><div class="section-title"><h2>Latest announcements</h2><a class="card-link" href="#announcements">View all →</a></div>${announcementCards(2)}</div>
+</div>`
+},
+dashboard(){
+return `<div class="fade"><div class="page-head"><div><div class="eyebrow">Overview</div><h1>Dashboard</h1><p>Your GreenLink activity centre.</p></div><a class="btn" href="#report">+ New Report</a></div>
+<div class="stats">${stat("🌿","72%","Community progress")} ${stat("📖","6","Lessons available")} ${stat("♻️","8","Waste categories")} ${stat("📝",state.reports.length,"Reports submitted")}</div>
+<div class="grid two"><div class="card"><h3>Environmental action</h3><p>Track your progress through learning and community activities.</p><div class="progress"><span style="width:72%"></span></div><small class="muted">72% activity target</small></div><div class="card"><h3>Quick actions</h3><div style="display:flex;flex-wrap:wrap;gap:9px;margin-top:14px"><a class="btn" href="#learn">Learn</a><a class="btn alt" href="#recycling">Recycle</a><a class="btn alt" href="#activities">Activities</a></div></div></div>
+<div class="section"><div class="section-title"><h2>Recent reports</h2></div>${reportsTable()}</div></div>`
+},
+learn(){
+return `<div class="fade"><div class="page-head"><div><div class="eyebrow">Education</div><h1>Learn</h1><p>Build practical environmental knowledge.</p></div></div><div class="searchbar"><input id="lessonSearch" placeholder="Search lessons..." oninput="filterLessons(this.value)"><select id="lessonCat" onchange="filterLessons(document.getElementById('lessonSearch').value)"><option value="">All topics</option><option>Environment</option><option>Recycling</option><option>Water</option><option>Nature</option><option>Energy</option></select></div><div id="lessonGrid" class="grid">${lessonCards(state.lessons)}</div></div>`
+},
+recycling(){
+const rows=[["Paper","📄","Clean paper, newspapers, cardboard","Recycle"],["Plastic","🥤","Bottles and suitable containers","Recycle"],["Glass","🫙","Clean glass bottles and jars","Recycle"],["Metal","🥫","Cans and clean metal containers","Recycle"],["Food scraps","🍌","Fruit/vegetable scraps","Compost"],["E-waste","🔌","Old electronics and batteries","Special handling"],["Textiles","👕","Reusable clothes and fabric","Reuse"],["Organic waste","🍂","Leaves and plant material","Compost"]];
+return `<div class="fade"><div class="page-head"><div><div class="eyebrow">Waste management</div><h1>Recycling Guide</h1><p>Sort waste correctly and give useful materials another life.</p></div></div><div class="notice">Tip: Keep recyclable materials reasonably clean and dry, and follow your local collection rules.</div><div class="section"><div class="card table-wrap"><table class="table"><thead><tr><th>Material</th><th>Icon</th><th>Examples</th><th>Action</th></tr></thead><tbody>${rows.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td><span class="tag ${r[3]==="Special handling"?"warning":""}">${r[3]}</span></td></tr>`).join("")}</tbody></table></div></div></div>`
+},
+activities(){
+return `<div class="fade"><div class="page-head"><div><div class="eyebrow">Take action</div><h1>Activities</h1><p>Practical ideas for a greener school and community.</p></div></div><div class="grid two">${[
+["21","SEP","Community Clean-Up","Work together to clean a shared public area.","🌱"],
+["24","SEP","Tree Care Session","Learn basic tree planting and care practices.","🌳"],
+["27","SEP","Recycling Challenge","Challenge your class or group to improve waste sorting.","♻️"],
+["30","SEP","Green Ideas Workshop","Share practical ideas for saving resources.","💡"]
+].map(a=>`<div class="card activity"><div style="display:flex;gap:15px"><div class="datebox"><b>${a[0]}</b><small>${a[1]}</small></div><div><h3>${a[4]} ${a[2]}</h3><p>${a[3]}</p></div></div><button class="btn alt" onclick="joinActivity('${a[2]}')">Join</button></div>`).join("")}</div></div>`
+},
+announcements(){
+return `<div class="fade"><div class="page-head"><div><div class="eyebrow">Stay informed</div><h1>Announcements</h1><p>Updates and environmental reminders.</p></div></div><div class="grid two">${announcementCards()}</div></div>`
+},
+report(){
+return `<div class="fade"><div class="page-head"><div><div class="eyebrow">Community reporting</div><h1>Report an Issue</h1><p>Record an environmental problem for review.</p></div></div><div class="grid two"><div class="card"><h3>Submit a report</h3><p style="margin-bottom:18px">Examples: illegal dumping, blocked drainage, littering or damaged green spaces.</p><form class="form" onsubmit="submitReport(event)"><div><label>Issue title</label><input id="rTitle" required placeholder="e.g. Waste dumped near drainage"></div><div><label>Category</label><select id="rCat"><option>Waste</option><option>Water</option><option>Air pollution</option><option>Green space</option><option>Other</option></select></div><div><label>Location</label><input id="rLocation" required placeholder="Area or landmark"></div><div><label>Description</label><textarea id="rDesc" required placeholder="Describe what you observed..."></textarea></div><button class="btn">Submit Report</button></form></div><div class="card"><h3>Why report?</h3><div class="lesson" style="margin-top:17px"><div class="lesson-icon">🔎</div><div><b>Identify</b><p>Document the problem clearly.</p></div></div><div class="lesson" style="margin-top:17px"><div class="lesson-icon">📋</div><div><b>Organise</b><p>Keep a record that can be reviewed.</p></div></div><div class="lesson" style="margin-top:17px"><div class="lesson-icon">🌱</div><div><b>Act</b><p>Use information to encourage practical action.</p></div></div></div></div></div>`
+},
+admin(){return `<div class="fade"><div class="page-head"><div><div class="eyebrow">Restricted management</div><h1>Admin Control Centre</h1><p>Admin-only tools for managing the GreenLink prototype.</p></div><button class="btn alt" onclick="adminLogout()">Log out</button></div><div class="stats">${stat("👥",loginEvents.length,"Login alerts")} ${stat("📝",state.reports.length,"Reports")} ${stat("📢",state.announcements.length,"Announcements")} ${stat("🔐","ON","Admin protection")}</div><div class="grid two"><div class="card"><h3>🔔 New student logins</h3><p>Every student login is recorded on this device for admin review.</p><div class="section">${loginEvents.length?loginEvents.slice(0,8).map(x=>`<div class="lesson" style="margin-bottom:12px"><div class="lesson-icon">👤</div><div><b>${esc(x.name)}</b><p>${esc(x.id)} • ${esc(x.date)}</p></div></div>`).join(""):`<div class="empty">No student logins recorded yet.</div>`}</div></div><div class="card"><h3>🛠️ Admin-only controls</h3><p>Only authenticated admins can use these controls.</p><div class="admin-tools"><button class="btn" onclick="adminAddAnnouncement()">＋ Add announcement</button><button class="btn alt" onclick="adminAction('Activity management opened')">Manage activities</button><button class="btn alt" onclick="adminAction('Reports review opened')">Review reports</button><button class="btn alt" onclick="adminClearLogins()">Clear login records</button></div></div></div><div class="section"><div class="card"><h3>Reports</h3>${reportsTable(true)}</div></div><div class="section grid two"><div class="card"><h3>System status</h3><p>Student login tracking: <b>Active</b></p><p>Admin authentication: <b>Active</b></p><p>Pages: <b>9 connected</b></p><p>Data storage: <b>Browser localStorage</b></p></div><div class="card"><h3>Prototype note</h3><p>New logins are visible to the admin on this browser/device. Cross-device notifications require a real backend and notification service.</p></div></div></div>`},
+about(){
+return `<div class="fade"><div class="page-head"><div><div class="eyebrow">Creator</div><h1>About the Creator</h1><p>The person behind IAN GreenLink.</p></div></div><div class="card creator"><div class="avatar">I</div><div><div class="eyebrow">IAN GreenLink</div><h2 style="margin:7px 0">Kanakulya Ian</h2><p><b>School:</b> St Cyprian High School</p><p><b>Date of Birth:</b> 26 June 2008</p><p style="margin-top:13px">Ian is a very creative person who enjoys web development in his free time. IAN GreenLink combines ICT with environmental awareness to encourage learning and practical community action.</p><p style="margin-top:13px"><b>Contact:</b> ian263434@gmail.com</p></div></div><div class="section grid"><div class="card"><div class="emoji">💻</div><h3>ICT in action</h3><p>Uses a responsive web interface to organise environmental information.</p></div><div class="card"><div class="emoji">🌍</div><h3>Environmental awareness</h3><p>Encourages responsible choices around waste, water, nature and energy.</p></div><div class="card"><div class="emoji">🚀</div><h3>Future growth</h3><p>The platform can later connect to a database, accounts and real reporting workflows.</p></div></div></div>`
+}
+};
+
+function stat(icon,num,label){return `<div class="stat"><div class="stat-icon">${icon}</div><small>${label}</small><div class="num">${num}</div></div>`}
+function feature(icon,title,text,link){return `<div class="card"><div class="emoji">${icon}</div><h3>${title}</h3><p>${text}</p><a class="card-link" href="#${link}">Explore →</a></div>`}
+function announcementCards(limit){let a=limit?state.announcements.slice(0,limit):state.announcements;return a.map(x=>`<div class="card" style="margin-bottom:13px"><span class="tag">${x.tag}</span><h3 style="margin-top:12px">${x.title}</h3><p>${x.text}</p><small class="muted" style="display:block;margin-top:12px">${x.date}</small></div>`).join("")}
+function lessonCards(list){
+  return list.length ? list.map((x,i)=>`
+    <div class="card lesson">
+      <div class="lesson-icon">${x.icon}</div>
+      <div>
+        <span class="tag">${esc(x.cat)}</span>
+        <h3 style="margin-top:9px">${esc(x.title)}</h3>
+        <p>${esc(x.text)}</p>
+        <button class="card-link lesson-read-btn" type="button" onclick="openLesson(${i})">Read full notes →</button>
+      </div>
+    </div>`).join("") :
+    `<div class="empty" style="grid-column:1/-1">No lessons found.</div>`;
+}
+function reportsTable(admin=false){if(!state.reports.length)return `<div class="empty">No reports submitted yet. <a class="card-link" href="#report">Create the first report →</a></div>`;return `<div class="table-wrap"><table class="table"><thead><tr><th>Issue</th><th>Category</th><th>Location</th><th>Date</th>${admin?"<th>Status</th>":""}</tr></thead><tbody>${state.reports.map(r=>`<tr><td><b>${esc(r.title)}</b><br><small class="muted">${esc(r.desc).slice(0,70)}</small></td><td>${esc(r.cat)}</td><td>${esc(r.location)}</td><td>${r.date}</td>${admin?"<td><span class='tag'>Submitted</span></td>":""}</tr>`).join("")}</tbody></table></div>`}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+const ADMIN_PASSWORD="kanakulyaian";let loginEvents=JSON.parse(localStorage.getItem("greenlink_logins")||"[]");let currentStudent=JSON.parse(localStorage.getItem("greenlink_student")||"null");let adminAuthenticated=sessionStorage.getItem("greenlink_admin")==="yes";function openLogin(){document.getElementById("loginModal").classList.add("show")}function closeLogin(){document.getElementById("loginModal").classList.remove("show")}function showAdminLogin(){document.getElementById("adminLoginArea").style.display="block";document.getElementById("adminPassword").focus()}function studentLogin(e){e.preventDefault();const name=document.getElementById("loginName").value.trim(),id=document.getElementById("loginId").value.trim();currentStudent={name,id};localStorage.setItem("greenlink_student",JSON.stringify(currentStudent));loginEvents.unshift({name,id,date:new Date().toLocaleString()});loginEvents=loginEvents.slice(0,50);localStorage.setItem("greenlink_logins",JSON.stringify(loginEvents));closeLogin();showToast("Welcome, "+name+"! Login recorded for admin.");render()}function adminLogin(e){e.preventDefault();if(document.getElementById("adminPassword").value!==ADMIN_PASSWORD){showToast("Incorrect admin password.");return}adminAuthenticated=true;sessionStorage.setItem("greenlink_admin","yes");closeLogin();location.hash="admin";render();showToast("Admin access granted.")}function adminLogout(){adminAuthenticated=false;sessionStorage.removeItem("greenlink_admin");location.hash="home";render();showToast("Admin logged out.")}function studentLogout(){currentStudent=null;localStorage.removeItem("greenlink_student");showToast("Student logged out.");render()}function adminAction(msg){if(!adminAuthenticated){showToast("Admin access required.");return}showToast(msg)}function adminAddAnnouncement(){if(!adminAuthenticated)return showToast("Admin access required.");const title=prompt("Announcement title:");if(!title)return;const text=prompt("Announcement message:");if(!text)return;state.announcements.unshift({title:title.trim(),text:text.trim(),date:new Date().toLocaleDateString(),tag:"Admin"});showToast("Announcement added.");render()}function adminDeleteReport(i){if(!adminAuthenticated)return showToast("Admin access required.");if(confirm("Delete this report?")){state.reports.splice(i,1);localStorage.setItem("greenlink_reports",JSON.stringify(state.reports));showToast("Report deleted.");render()}}function adminClearLogins(){if(!adminAuthenticated)return showToast("Admin access required.");if(confirm("Clear all recorded student logins?")){loginEvents=[];localStorage.removeItem("greenlink_logins");showToast("Login records cleared.");render()}}
+
+function openLesson(index){
+  const lesson=state.lessons[Number(index)];
+  if(!lesson)return;
+  const titleEl=document.getElementById("lessonModalTitle");
+  const notesEl=document.getElementById("lessonModalNotes");
+  const modal=document.getElementById("lessonModal");
+  if(!titleEl||!notesEl||!modal){showToast("Lesson reader could not open.");return;}
+  titleEl.textContent=lesson.title;
+  notesEl.textContent=lesson.notes||lesson.text;
+  modal.classList.add("show");
+  document.body.style.overflow="hidden";
+}
+function closeLesson(){
+  const modal=document.getElementById("lessonModal");
+  if(modal)modal.classList.remove("show");
+  document.body.style.overflow="";
+}
+function render(){
+let page=location.hash.replace("#","")||"home";if(!pages[page])page="home";
+if(page==="admin"&&!adminAuthenticated){openLogin();page="home";location.hash="home";}
+document.getElementById("content").innerHTML=pages[page]();
+document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("active",a.dataset.page===page));
+document.getElementById("sidebar").classList.remove("open");window.scrollTo(0,0);
+}
+function go(p){location.hash=p}
+function toggleSidebar(){document.getElementById("sidebar").classList.toggle("open")}
+function toggleTheme(){document.body.classList.toggle("dark");localStorage.setItem("greenlink_theme",document.body.classList.contains("dark")?"dark":"light")}
+function showToast(msg){let t=document.getElementById("toast");t.textContent=msg;t.className="toast show";clearTimeout(window.tt);window.tt=setTimeout(()=>t.className="toast",2500)}
+function filterLessons(q){let cat=document.getElementById("lessonCat").value.toLowerCase();q=q.toLowerCase();let list=state.lessons.filter(x=>(x.title+" "+x.text+" "+x.cat).toLowerCase().includes(q)&&(!cat||x.cat.toLowerCase()===cat));document.getElementById("lessonGrid").innerHTML=lessonCards(list)}
+function joinActivity(name){showToast("You joined: "+name)}
+function submitReport(e){e.preventDefault();let r={title:document.getElementById("rTitle").value,cat:document.getElementById("rCat").value,location:document.getElementById("rLocation").value,desc:document.getElementById("rDesc").value,date:new Date().toLocaleDateString()};state.reports.unshift(r);localStorage.setItem("greenlink_reports",JSON.stringify(state.reports));showToast("Report submitted successfully");setTimeout(()=>go("dashboard"),500)}
+function clearReports(){if(confirm("Clear all locally saved demo reports?")){state.reports=[];localStorage.removeItem("greenlink_reports");render();showToast("Reports cleared")}}
+window.addEventListener("hashchange",render);
+if(localStorage.getItem("greenlink_theme")==="dark")document.body.classList.add("dark");
+render();
+
+</script>
+
+
+<div id="lessonModal" class="lesson-modal">
+  <div class="lesson-modal-box">
+    <button class="modal-close" onclick="closeLesson()" aria-label="Close lesson">×</button>
+    <div class="eyebrow">IAN GreenLink • Learning Notes</div>
+    <h2 id="lessonModalTitle">Lesson</h2>
+    <div id="lessonModalNotes" class="lesson-notes"></div>
+    <div style="margin-top:22px"><button class="btn" onclick="closeLesson()">Done reading</button></div>
+  </div>
+</div>
+
+<div id="loginModal" class="modal-overlay"><div class="login-box"><button class="modal-close" onclick="closeLogin()">×</button><div class="login-logo">🌿</div><div class="eyebrow">IAN GreenLink</div><h2>Student Login</h2><p class="muted">Sign in to access your GreenLink student dashboard.</p><form class="form" onsubmit="studentLogin(event)"><div><label>Student name</label><input id="loginName" required placeholder="Enter your name"></div><div><label>Student ID</label><input id="loginId" required placeholder="e.g. S4-001"></div><button class="btn" type="submit">Login as Student</button></form><button class="admin-login-link" onclick="showAdminLogin()">Admin login</button><div id="adminLoginArea" class="admin-login-area" style="display:none"><form class="form" onsubmit="adminLogin(event)"><div><label>Admin password</label><input id="adminPassword" type="password" required placeholder="Enter admin password"></div><button class="btn" type="submit">Enter Admin Panel</button></form></div></div></div>
+</body>
+</html>
